@@ -6,8 +6,8 @@ import org.junit.Test;
 public class TestUtility {
 
 	@Test
-	public void test() {
-		fail("Not yet implemented1");
+	public void ConvertBitToInt_EmptyString_ShouldReturnZero() {
+		Utility.convertBitToInt("");
 	}
 
 }
