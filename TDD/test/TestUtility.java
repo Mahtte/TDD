@@ -35,10 +35,10 @@ public class TestUtility {
 	}
 	
 	@Test
-	public void ConvertBitToInt_StringContainsANumberBiggerThan1_ShouldThrowException() {
+	public void ConvertBitToInt_StringContainsANumberBiggerThanOne_ShouldThrowException() {
 		exception.expect(IllegalArgumentException.class);
 		exception.expectMessage("String can only contain numbers 0 - 1");
-		Utility.convertBitToInt("01234567890");
+		Utility.convertBitToInt("2");
 	}
 	
 	

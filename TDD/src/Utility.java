@@ -15,6 +15,11 @@ public class Utility {
 					"String can only contain numbers 0 - 1");
 		}
 
+		if (hasDigitBiggerThanOne(string) && string.length() > 0) {
+			throw new IllegalArgumentException(
+					"String can only contain numbers 0 - 1");
+		}
+
 		/** Convert from bit to int */
 		int converted = 0;
 		if (string.length() < 1) {
@@ -22,6 +27,15 @@ public class Utility {
 		} else
 			return converted;
 
+	}
+
+	private static boolean hasDigitBiggerThanOne(String string) {
+		for (int i = 0; i < string.length(); i++) {
+			if (string.charAt(i) > '1') {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	private static boolean hasLetter(String string) {
