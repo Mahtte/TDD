@@ -2,7 +2,12 @@
 public class Utility {
 
 	public static int convertBitToInt(String string) {
-		return 0;
+		int converted = 0;
+		if (string.length() < 1) {
+			return converted;
+		}
+		else
+			return converted;
 		
 	}
 //
