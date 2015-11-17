@@ -22,13 +22,12 @@ public class Utility {
 		}
 
 		/** Convert from bit to int */
-		int converted = 0;
 		if (stringIsEmpty(string)) {
-			return converted;
-		} else {
+			return 0;
+		}
 			return charIsZeroOrOne(string.charAt(0));
 
-		}
+		
 			
 	}
 
