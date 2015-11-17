@@ -11,7 +11,7 @@ import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
 @RunWith(Parameterized.class)
-public class TestUtilityParam {
+public class TestUtilityBitToIntParam {
 	@Parameters
 	  public static Collection<Object[]> data() {
 	      return Arrays.asList(new Object[][] {
@@ -25,7 +25,7 @@ public class TestUtilityParam {
 	  private final String actual;
 	  private final int expected;
 	 
-	  public TestUtilityParam(String actual, int expected){
+	  public TestUtilityBitToIntParam(String actual, int expected){
 	      this.actual = actual;
 	      this.expected = expected;
 	  }

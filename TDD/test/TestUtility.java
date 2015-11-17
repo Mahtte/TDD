@@ -56,6 +56,13 @@ public class TestUtility {
 		assertEquals(1, Utility.convertBitToInt("01"));
 	}
 	
+	@Test
+	public void ConvertIntToBit_IntegerIsBiggerThan16777215_ShouldThrowException() {
+		exception.expect(IllegalArgumentException.class);
+		exception.expectMessage("The number to be converted cant be larger than 16777215");
+		Utility.convertIntToBit(16777216);
+	}
+	
 	
 	
 	

@@ -2,7 +2,7 @@ public class Utility {
 
 	public static int convertBitToInt(String string) {
 
-		checkArguments(string);
+		checkString(string);
 
 		/** Convert from bit to int */
 		if (stringIsEmpty(string)) {
@@ -16,8 +16,17 @@ public class Utility {
 		return converted;
 
 	}
+	
+	public static String convertIntToBit(int number) {
+		if (number > 16777215) {
+			throw new IllegalArgumentException(
+					"The number to be converted cant be larger than 16777215");
+		}
+		return ("");
+		
+	}
 
-	private static void checkArguments(String string) {
+	private static void checkString(String string) {
 		/**
 		 * Check if string has more than 24 characters and if string contains
 		 * other than 0 and 1
@@ -74,5 +83,7 @@ public class Utility {
 		} else
 			return 0;
 	}
+
+
 	
 }
