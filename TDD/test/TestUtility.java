@@ -70,7 +70,12 @@ public class TestUtility {
 	
 	@Test
 	public void ConvertIntToBit_1_ShouldReturn000000000000000000000001() {
-		assertEquals("000000000000000000000001", Utility.convertIntToBit(0));
+		assertEquals("000000000000000000000001", Utility.convertIntToBit(1));
+	}
+	
+	@Test
+	public void ConvertIntToBit_3_ShouldReturn000000000000000000000011() {
+		assertEquals("000000000000000000000011", Utility.convertIntToBit(3));
 	}
 	
 	@Test

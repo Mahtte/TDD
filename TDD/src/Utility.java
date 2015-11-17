@@ -16,11 +16,33 @@ public class Utility {
 		return converted;
 
 	}
-	
+
 	public static String convertIntToBit(int number) {
 		checkInt(number);
-		return ("0");
-		
+		StringBuilder bitString = new StringBuilder("000000000000000000000000");
+		int[] powers = new int[25];
+		for (int i = 0; i < powers.length; i++) {
+			powers[i] = (int) Math.pow(2, i);
+		}
+
+		for (int i = powers.length - 2; i >= 0; i--) {
+
+			if (number == powers[i]) {
+				bitString.setCharAt(23 - i, '1');
+
+				number = number - powers[i];
+			} else if (number > powers[i]) {
+				if (number < powers[i + 1]) {
+					bitString.setCharAt(23 - i, '1');
+					number = number - powers[i];
+				}
+
+			}
+
+		}
+
+		return bitString.toString();
+
 	}
 
 	private static void checkInt(int number) {
@@ -75,10 +97,12 @@ public class Utility {
 		} else
 			return false;
 	}
-	
-	/** converts character 1 or 0 to int value 1 or 0.
+
+	/**
+	 * converts character 1 or 0 to int value 1 or 0.
 	 * 
-	 * @param c character to be converted
+	 * @param c
+	 *            character to be converted
 	 * @return 1 or 0
 	 */
 	private static int charIsZeroOrOne(char c) {
@@ -88,6 +112,4 @@ public class Utility {
 			return 0;
 	}
 
-
-	
 }
