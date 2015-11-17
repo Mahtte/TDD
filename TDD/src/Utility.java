@@ -25,9 +25,11 @@ public class Utility {
 		int converted = 0;
 		if (stringIsEmpty(string)) {
 			return converted;
-		} else
+		} else {
 			return converted;
 
+		}
+			
 	}
 
 	private static boolean hasDigitBiggerThanOne(String string) {
