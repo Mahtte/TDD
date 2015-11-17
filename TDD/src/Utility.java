@@ -1,6 +1,7 @@
 public class Utility {
 
 	public static int convertBitToInt(String string) {
+
 		/**
 		 * Check if string has more than 24 characters and if string contains
 		 * other than 0 and 1
@@ -10,19 +11,19 @@ public class Utility {
 					"String length must be less than 24");
 		}
 
-		if (hasLetter(string) && string.length() > 0) {
+		if (hasLetter(string) && !stringIsEmpty(string)) {
 			throw new IllegalArgumentException(
 					"String can only contain numbers 0 - 1");
 		}
 
-		if (hasDigitBiggerThanOne(string) && string.length() > 0) {
+		if (hasDigitBiggerThanOne(string) && !stringIsEmpty(string)) {
 			throw new IllegalArgumentException(
 					"String can only contain numbers 0 - 1");
 		}
 
 		/** Convert from bit to int */
 		int converted = 0;
-		if (string.length() < 1) {
+		if (stringIsEmpty(string)) {
 			return converted;
 		} else
 			return converted;
@@ -45,5 +46,12 @@ public class Utility {
 		} else
 			return true;
 
+	}
+
+	private static boolean stringIsEmpty(String string) {
+		if (string.length() < 1) {
+			return true;
+		} else
+			return false;
 	}
 }
