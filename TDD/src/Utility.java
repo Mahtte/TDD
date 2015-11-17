@@ -8,15 +8,10 @@ public class Utility {
 		if (stringIsEmpty(string)) {
 			return 0;
 		}
-		int[] values = new int[24];
 		int converted = 0;
-		for (int i = 0; i < values.length; i++) {
-			values[i] = (int) Math.pow(2, i);
-		}
-
 		for (int i = 0; i < string.length(); i++) {
 			converted += charIsZeroOrOne(string.charAt(string.length() - 1 - i))
-					* values[i];
+					* Math.pow(2, i);
 		}
 		return converted;
 
