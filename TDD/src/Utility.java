@@ -26,7 +26,7 @@ public class Utility {
 		if (stringIsEmpty(string)) {
 			return converted;
 		} else {
-			return converted;
+			return charIsZeroOrOne(string.charAt(0));
 
 		}
 			
@@ -55,5 +55,13 @@ public class Utility {
 			return true;
 		} else
 			return false;
+	}
+	
+	private static int charIsZeroOrOne(char c) {
+		if (c == '1') {
+			return 1;
+		}
+		else 
+			return 0;
 	}
 }

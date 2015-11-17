@@ -46,6 +46,11 @@ public class TestUtility {
 		assertEquals(0, Utility.convertBitToInt("0"));
 	}
 	
+	@Test
+	public void ConvertBitToInt_1_ShouldReturn1() {
+		assertEquals(1, Utility.convertBitToInt("1"));
+	}
+	
 	
 	
 	
