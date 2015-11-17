@@ -18,7 +18,7 @@ public class TestUtility {
 	@Test
 	public void ConvertBitToInt_StringLengtIsMoreThan24_ShouldThrowException() {
 		exception.expect(IllegalArgumentException.class);
-		exception.expectMessage("String length must be less than 24");
+		exception.expectMessage("String length must be less than 25");
 		Utility.convertBitToInt("00000000000000000000000000000");
 	}
 	
@@ -81,6 +81,20 @@ public class TestUtility {
 	@Test
 	public void ConvertIntToBit_ReturnedStringLengthShouldBe24() {
 		assertEquals(24, Utility.convertIntToBit(0).length());
+	}
+	
+	@Test
+	public void ConvertHexToInt_StringIsLongerThanSix_ShouldThrowException() {
+		exception.expect(IllegalArgumentException.class);
+		exception.expectMessage("String length must be less than 7");
+		Utility.convertHexToInt("AA33333");
+	}
+	
+	@Test
+	public void ConvertHexToInt_StringContainsIllegalCharacters_ShouldReturn0() {
+		exception.expect(IllegalArgumentException.class);
+		exception.expectMessage("String can only contain characters: 01234567890ABCDEF / abcdef");
+		Utility.convertHexToInt("AA333k");
 	}
 	
 	

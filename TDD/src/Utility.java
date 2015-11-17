@@ -2,7 +2,7 @@ public class Utility {
 
 	public static int convertBitToInt(String string) {
 
-		checkString(string);
+		checkBitString(string);
 
 		/** Convert from bit to int */
 		if (stringIsEmpty(string)) {
@@ -52,14 +52,14 @@ public class Utility {
 		}
 	}
 
-	private static void checkString(String string) {
+	private static void checkBitString(String string) {
 		/**
 		 * Check if string has more than 24 characters and if string contains
 		 * other than 0 and 1
 		 */
 		if (string.length() > 24) {
 			throw new IllegalArgumentException(
-					"String length must be less than 24");
+					"String length must be less than 25");
 		}
 
 		if (hasLetter(string) && !stringIsEmpty(string)) {
@@ -110,6 +110,23 @@ public class Utility {
 			return 1;
 		} else
 			return 0;
+	}
+
+	public static int convertHexToInt(String s) {
+		checkHexString(s);
+		return -1;
+	}
+
+	private static void checkHexString(String string) {
+		if (string.length() > 6) {
+			throw new IllegalArgumentException(
+					"String length must be less than 7");
+		}
+
+		if (!string.matches("[0-9A-Fa-f]+")) {
+			throw new IllegalArgumentException(
+					"String can only contain characters: 01234567890ABCDEF / abcdef");
+		}
 	}
 
 }
