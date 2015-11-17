@@ -2,6 +2,27 @@ public class Utility {
 
 	public static int convertBitToInt(String string) {
 
+		checkArguments(string);
+
+		/** Convert from bit to int */
+		if (stringIsEmpty(string)) {
+			return 0;
+		}
+		int[] values = new int[24];
+		int converted = 0;
+		for (int i = 0; i < values.length; i++) {
+			values[i] = (int) Math.pow(2, i);
+		}
+
+		for (int i = 0; i < string.length(); i++) {
+			converted += charIsZeroOrOne(string.charAt(string.length() - 1 - i))
+					* values[i];
+		}
+		return converted;
+
+	}
+
+	private static void checkArguments(String string) {
 		/**
 		 * Check if string has more than 24 characters and if string contains
 		 * other than 0 and 1
@@ -20,24 +41,6 @@ public class Utility {
 			throw new IllegalArgumentException(
 					"String can only contain numbers 0 - 1");
 		}
-
-		/** Convert from bit to int */
-		if (stringIsEmpty(string)) {
-			return 0;
-		}
-		int[] values = new int[24];
-		int converted = 0;
-		for (int i = 0; i < values.length; i++) {
-			values[i] = (int) Math.pow(2, i);
-		}
-		
-		for (int i = 0; i < string.length(); i++) {
-			converted += charIsZeroOrOne(string.charAt(string.length() - 1 - i)) * values[i]; 
-		}
-		return converted;
-
-		
-			
 	}
 
 	private static boolean hasDigitBiggerThanOne(String string) {
@@ -65,11 +68,16 @@ public class Utility {
 			return false;
 	}
 	
+	/** converts character 1 or 0 to int value 1 or 0.
+	 * 
+	 * @param c character to be converted
+	 * @return 1 or 0
+	 */
 	private static int charIsZeroOrOne(char c) {
 		if (c == '1') {
 			return 1;
-		}
-		else 
+		} else
 			return 0;
 	}
+	
 }
