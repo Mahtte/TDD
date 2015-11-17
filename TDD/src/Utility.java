@@ -18,12 +18,16 @@ public class Utility {
 	}
 	
 	public static String convertIntToBit(int number) {
+		checkInt(number);
+		return ("0");
+		
+	}
+
+	private static void checkInt(int number) {
 		if (number > 16777215) {
 			throw new IllegalArgumentException(
 					"The number to be converted cant be larger than 16777215");
 		}
-		return ("");
-		
 	}
 
 	private static void checkString(String string) {

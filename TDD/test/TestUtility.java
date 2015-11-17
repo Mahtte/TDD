@@ -63,6 +63,20 @@ public class TestUtility {
 		Utility.convertIntToBit(16777216);
 	}
 	
+	@Test
+	public void ConvertIntToBit_0_ShouldReturn000000000000000000000000() {
+		assertEquals("000000000000000000000000", Utility.convertIntToBit(0));
+	}
+	
+	@Test
+	public void ConvertIntToBit_1_ShouldReturn000000000000000000000001() {
+		assertEquals("000000000000000000000001", Utility.convertIntToBit(0));
+	}
+	
+	@Test
+	public void ConvertIntToBit_ReturnedStringLengthShouldBe24() {
+		assertEquals(24, Utility.convertIntToBit(0).length());
+	}
 	
 	
 	
