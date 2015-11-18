@@ -113,6 +113,9 @@ public class Utility {
 	}
 
 	public static int convertHexToInt(String s) {
+		if (stringIsEmpty(s)) {
+			return 0;
+		}
 		checkHexString(s);
 		return -1;
 	}

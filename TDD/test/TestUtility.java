@@ -91,10 +91,15 @@ public class TestUtility {
 	}
 	
 	@Test
-	public void ConvertHexToInt_StringContainsIllegalCharacters_ShouldReturn0() {
+	public void ConvertHexToInt_StringContainsIllegalCharacters_ShouldThrowException() {
 		exception.expect(IllegalArgumentException.class);
 		exception.expectMessage("String can only contain characters: 01234567890ABCDEF / abcdef");
 		Utility.convertHexToInt("AA333k");
+	}
+	
+	@Test
+	public void ConvertHexToInt_EmptyString_ShouldReturn0() {
+		assertEquals(0, Utility.convertHexToInt(""));
 	}
 	
 	
