@@ -121,11 +121,6 @@ public class Utility {
 		checkHexString(s);
 		String string = s.toUpperCase();
 
-		int[] powers = new int[6];
-		for (int i = 0; i < powers.length; i++) {
-			powers[i] = (int) Math.pow(16, i);
-		}
-
 		int converted = 0;
 		for (int i = 0; i < string.length(); i++) {
 			converted += getValue(string.charAt(string.length() - 1 - i))
