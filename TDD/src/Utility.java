@@ -120,12 +120,33 @@ public class Utility {
 		}
 		checkHexString(s);
 		String string = s.toUpperCase();
-		
-		HashMap<Character, Integer> letters = new java.util.HashMap<Character, Integer>(6);
-		for (int i = 0; i < 7; i++) {
-			letters.put('A', 10 + i);
+
+		int[] powers = new int[6];
+		for (int i = 0; i < powers.length; i++) {
+			powers[i] = (int) Math.pow(16, i);
 		}
-		return 0;
+
+		int converted = 0;
+		for (int i = 0; i < string.length(); i++) {
+			converted += getValue(string.charAt(string.length() - 1 - i))
+					* Math.pow(16, i);
+		}
+
+		return converted;
+	}
+
+	private static int getValue(char c) {
+
+		HashMap<Character, Integer> values = new java.util.HashMap<Character, Integer>(
+				16);
+		for (int i = 0; i < 7; i++) {
+			values.put((char) ('A' + i), 10 + i);
+		}
+
+		for (int i = 0; i < 10; i++) {
+			values.put((char) ('0' + i), i);
+		}
+		return values.get(c);
 	}
 
 	private static void checkHexString(String string) {
