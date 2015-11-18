@@ -31,7 +31,6 @@ public class Utility {
 
 			if (number == powers[i]) {
 				bitString.setCharAt(23 - i, '1');
-
 				number = number - powers[i];
 			} else if (number > powers[i]) {
 				if (number < powers[i + 1]) {
@@ -141,5 +140,13 @@ public class Utility {
 					"String can only contain characters: 01234567890ABCDEF / abcdef");
 		}
 	}
+
+	public static String convertIntToHex(int number) {
+		checkInt(number);
+		
+		return ("");
+		
+	}
+
 
 }

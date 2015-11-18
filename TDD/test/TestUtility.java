@@ -128,5 +128,13 @@ public class TestUtility {
 		assertEquals(15, Utility.convertHexToInt("F"));
 	}
 	
+	@Test
+	public void ConvertIntToHex_IntegerIsBiggerThan16777215_ShouldThrowException() {
+		exception.expect(IllegalArgumentException.class);
+		exception
+				.expectMessage("The number to be converted cant be larger than 16777215");
+		Utility.convertIntToHex(16777216);
+	}
+	
 
 }
