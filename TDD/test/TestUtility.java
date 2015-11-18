@@ -102,6 +102,20 @@ public class TestUtility {
 		assertEquals(0, Utility.convertHexToInt(""));
 	}
 	
+	@Test
+	public void ConvertHexToInt_0_ShouldReturn0() {
+		assertEquals(0, Utility.convertHexToInt("0"));
+	}
+	
+	@Test
+	public void ConvertHexToInt_1_ShouldReturn1() {
+		assertEquals(1, Utility.convertHexToInt("1"));
+	}
+	
+	@Test
+	public void ConvertHexToInt_A_ShouldReturn10() {
+		assertEquals(10, Utility.convertHexToInt("A"));
+	}
 	
 	
 	

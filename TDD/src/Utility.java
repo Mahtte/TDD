@@ -1,3 +1,5 @@
+import java.util.HashMap;
+
 public class Utility {
 
 	public static int convertBitToInt(String string) {
@@ -117,7 +119,13 @@ public class Utility {
 			return 0;
 		}
 		checkHexString(s);
-		return -1;
+		String string = s.toUpperCase();
+		
+		HashMap<Character, Integer> letters = new java.util.HashMap<Character, Integer>(6);
+		for (int i = 0; i < 7; i++) {
+			letters.put('A', 10 + i);
+		}
+		return 0;
 	}
 
 	private static void checkHexString(String string) {
