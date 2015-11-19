@@ -1,8 +1,10 @@
+import java.util.HashMap;
+
 public class Utility {
 
 	public static int convertBitToInt(String string) {
 
-		checkString(string);
+		checkBitString(string);
 
 		/** Convert from bit to int */
 		if (stringIsEmpty(string)) {
@@ -10,7 +12,7 @@ public class Utility {
 		}
 		int converted = 0;
 		for (int i = 0; i < string.length(); i++) {
-			converted += charIsZeroOrOne(string.charAt(string.length() - 1 - i))
+			converted += getValue(string.charAt(string.length() - 1 - i))
 					* Math.pow(2, i);
 		}
 		return converted;
@@ -47,14 +49,14 @@ public class Utility {
 		}
 	}
 
-	private static void checkString(String string) {
+	private static void checkBitString(String string) {
 		/**
 		 * Check if string has more than 24 characters and if string contains
 		 * other than 0 and 1
 		 */
 		if (string.length() > 24) {
 			throw new IllegalArgumentException(
-					"String length must be less than 24");
+					"String length must be less than 25");
 		}
 
 		if (hasLetter(string) && !stringIsEmpty(string)) {
@@ -93,18 +95,48 @@ public class Utility {
 			return false;
 	}
 
-	/**
-	 * converts character 1 or 0 to int value 1 or 0.
-	 * 
-	 * @param c
-	 *            character to be converted
-	 * @return 1 or 0
-	 */
-	private static int charIsZeroOrOne(char c) {
-		if (c == '1') {
-			return 1;
-		} else
+	public static int convertHexToInt(String s) {
+		if (stringIsEmpty(s)) {
 			return 0;
+		}
+		checkHexString(s);
+		String string = s.toUpperCase();
+
+		int converted = 0;
+		for (int i = 0; i < string.length(); i++) {
+			converted += getValue(string.charAt(string.length() - 1 - i))
+					* Math.pow(16, i);
+		}
+
+		return converted;
 	}
+
+	private static int getValue(char c) {
+		if (c >= '0' && c <= '9') {
+			return c - '0';
+		}
+		else	
+			return (c - 'A') + 10;
+	}
+
+	private static void checkHexString(String string) {
+		if (string.length() > 6) {
+			throw new IllegalArgumentException(
+					"String length must be less than 7");
+		}
+
+		if (!string.matches("[0-9A-Fa-f]+")) {
+			throw new IllegalArgumentException(
+					"String can only contain characters: 01234567890ABCDEF / abcdef");
+		}
+	}
+
+	public static String convertIntToHex(int number) {
+		checkInt(number);
+		
+		return ("");
+		
+	}
+
 
 }

@@ -18,7 +18,7 @@ public class TestUtility {
 	@Test
 	public void ConvertBitToInt_StringLengtIsMoreThan24_ShouldThrowException() {
 		exception.expect(IllegalArgumentException.class);
-		exception.expectMessage("String length must be less than 24");
+		exception.expectMessage("String length must be less than 25");
 		Utility.convertBitToInt("00000000000000000000000000000");
 	}
 	
