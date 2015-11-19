@@ -199,8 +199,8 @@ public class TestUtility {
 	}
 	
 	@Test
-	public void blabla() {
-		assertEquals("7", Utility.convertIntToHex(2000));
+	public void ConvertIntToHex_61459_ShouldReturnF013 () {
+		assertEquals("F013", Utility.convertIntToHex(61459));
 	}
 	
 	

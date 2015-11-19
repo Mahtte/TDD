@@ -128,16 +128,16 @@ public class Utility {
 
 	public static String convertIntToHex(int number) {
 		checkInt(number);
-		StringBuilder hex = new StringBuilder("000000");
-		int rest = 0;
+		StringBuilder hex = new StringBuilder(6);
+		int rest = -1;
 		
-		
+		while(rest != 0) {
 	
 		rest = (int) (number % Math.pow(16, getLargestPowerOfSixteenThatIsLessOrEqualToNumber(number)));
 		number = (int) (number / Math.pow(16, getLargestPowerOfSixteenThatIsLessOrEqualToNumber(number)));
-		hex.replace(5 - getLargestPowerOfSixteenThatIsLessOrEqualToNumber(number),5 - getLargestPowerOfSixteenThatIsLessOrEqualToNumber(number) + 1, 
-				 "" + getHexValue(number));
+		hex.append(getHexValue(number));
 		number = rest;
+		}
 		
 
 		return hex.toString();
