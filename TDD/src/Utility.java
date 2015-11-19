@@ -181,5 +181,12 @@ public class Utility {
 		} else
 			return (char) ('A' + number - 10);
 	}
+	
+	private static String createZeroes(int times) {
+		while (times > 0) {
+			hex.append('0');
+			position--;
+			difference--;
+	}
 
 }
