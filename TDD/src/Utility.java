@@ -1,4 +1,3 @@
-import java.util.HashMap;
 
 public class Utility {
 
@@ -22,22 +21,15 @@ public class Utility {
 	public static String convertIntToBit(int number) {
 		checkInt(number);
 		StringBuilder bitString = new StringBuilder("000000000000000000000000");
-		int[] powers = new int[25];
-		for (int i = 0; i < powers.length; i++) {
-			powers[i] = (int) Math.pow(2, i);
-		}
 
-		for (int i = powers.length - 2; i >= 0; i--) {
-
-			if (number == powers[i]) {
+		for (int i = 23; i >= 0; i--) {
+			if (number == Math.pow(2, i)) {
 				bitString.setCharAt(23 - i, '1');
-				number = number - powers[i];
-			} else if (number > powers[i]) {
-				if (number < powers[i + 1]) {
-					bitString.setCharAt(23 - i, '1');
-					number = number - powers[i];
-				}
-
+				number = (int) (number - Math.pow(2, i));
+				
+			} else if (number > Math.pow(2, i) && number < Math.pow(2, i + 1)) {
+				bitString.setCharAt(23 - i, '1');
+				number = (int) (number - Math.pow(2, i));
 			}
 
 		}
@@ -116,17 +108,10 @@ public class Utility {
 	}
 
 	private static int getValue(char c) {
-
-		HashMap<Character, Integer> values = new java.util.HashMap<Character, Integer>(
-				16);
-		for (int i = 0; i < 7; i++) {
-			values.put((char) ('A' + i), 10 + i);
-		}
-
-		for (int i = 0; i < 10; i++) {
-			values.put((char) ('0' + i), i);
-		}
-		return values.get(c);
+		if (c >= '0' && c <= '9') {
+			return c - '0';
+		} else
+			return (c - 'A') + 10;
 	}
 
 	private static void checkHexString(String string) {
@@ -143,10 +128,9 @@ public class Utility {
 
 	public static String convertIntToHex(int number) {
 		checkInt(number);
-		
-		return ("");
-		
-	}
 
+		return ("");
+
+	}
 
 }
