@@ -198,6 +198,11 @@ public class TestUtility {
 		assertEquals("FFFFFF", Utility.convertIntToHex(16777215));
 	}
 	
+	@Test
+	public void blabla() {
+		assertEquals("7", Utility.convertIntToHex(2000));
+	}
+	
 	
 
 }

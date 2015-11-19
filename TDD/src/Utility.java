@@ -131,20 +131,15 @@ public class Utility {
 		StringBuilder hex = new StringBuilder("000000");
 		int rest = 0;
 		
-		while (rest > 0) {
+		
+	
 		rest = (int) (number % Math.pow(16, getLargestPowerOfSixteenThatIsLessOrEqualToNumber(number)));
 		number = (int) (number / Math.pow(16, getLargestPowerOfSixteenThatIsLessOrEqualToNumber(number)));
-		hex.setCharAt(getLargestPowerOfSixteenThatIsLessOrEqualToNumber(number), getHexValue(number));
+		hex.replace(5 - getLargestPowerOfSixteenThatIsLessOrEqualToNumber(number),5 - getLargestPowerOfSixteenThatIsLessOrEqualToNumber(number) + 1, 
+				 "" + getHexValue(number));
 		number = rest;
-		}
 		
-		if (number > 15) {
-			rest = number % 16;
-			hex.append(getHexValue(rest));
-			number = number / 16;
-		}
-		
-		hex.insert(0, (getHexValue(number)));
+
 		return hex.toString();
 
 	}
