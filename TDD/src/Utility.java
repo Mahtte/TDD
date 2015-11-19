@@ -138,23 +138,17 @@ public class Utility {
 			number = (int) (number / Math.pow(16, power));
 			if (power < position) {
 				difference = position - power;
-
-				while (difference > 0) {
-					hex.append('0');
-					position--;
-					difference--;
-				}
+				hex.append(createZeroes(difference));
+				position = position - difference;
+				
 			}
 
 			hex.append(getHexValue(number));
 			position--;
 			if (rest == 0 && position >= 0) {
 				difference = power;
-				while (difference > 0) {
-					hex.append('0');
-					position--;
-					difference--;
-				}
+				hex.append(createZeroes(difference));
+				position = position - difference;
 			}
 			number = rest;
 		}
@@ -181,12 +175,14 @@ public class Utility {
 		} else
 			return (char) ('A' + number - 10);
 	}
-	
-	private static String createZeroes(int times) {
-		while (times > 0) {
-			hex.append('0');
-			position--;
-			difference--;
-	}
 
+	private static String createZeroes(int times) {
+		String str = "";
+
+		while (times > 0) {
+			str = str + '0';
+			times--;
+		}
+		return str;
+	}
 }
