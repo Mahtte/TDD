@@ -11,7 +11,7 @@ public class Utility {
 		}
 		int converted = 0;
 		for (int i = 0; i < string.length(); i++) {
-			converted += getValue(string.charAt(string.length() - 1 - i))
+			converted += getIntValue(string.charAt(string.length() - 1 - i))
 					* Math.pow(2, i);
 		}
 		return converted;
@@ -100,14 +100,14 @@ public class Utility {
 
 		int converted = 0;
 		for (int i = 0; i < string.length(); i++) {
-			converted += getValue(string.charAt(string.length() - 1 - i))
+			converted += getIntValue(string.charAt(string.length() - 1 - i))
 					* Math.pow(16, i);
 		}
 
 		return converted;
 	}
 
-	private static int getValue(char c) {
+	private static int getIntValue(char c) {
 		if (c >= '0' && c <= '9') {
 			return c - '0';
 		} else
@@ -128,9 +128,14 @@ public class Utility {
 
 	public static String convertIntToHex(int number) {
 		checkInt(number);
+		String hex = "" + getHexValue(number);
+		return hex;
 
-		return ("");
+	}
 
+	private static char getHexValue(int number) {
+		
+			return (char) ('0' + number);
 	}
 
 }

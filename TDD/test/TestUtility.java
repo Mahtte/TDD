@@ -136,5 +136,18 @@ public class TestUtility {
 		Utility.convertIntToHex(16777216);
 	}
 	
+	@Test
+	public void ConvertIntToHex_0_ShouldReturn0() {
+		assertEquals("0", Utility.convertIntToHex(0));
+	}
+	
+	
+	@Test
+	public void ConvertIntToHex_1_ShouldReturn1() {
+		assertEquals("1", Utility.convertIntToHex(1));
+	}
+	
+	
+	
 
 }
