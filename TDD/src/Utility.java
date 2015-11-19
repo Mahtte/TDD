@@ -1,16 +1,17 @@
 public class Utility {
 
-	public static int convertBitToInt(String string) {
+	public static int convertBitToInt(String bitString) {
 
-		checkBitString(string);
+		checkBitString(bitString);
 
 		/** Convert from bit to int */
-		if (stringIsEmpty(string)) {
+		if (stringIsEmpty(bitString)) {
 			return 0;
 		}
 		int converted = 0;
-		for (int i = 0; i < string.length(); i++) {
-			converted += getIntValue(string.charAt(string.length() - 1 - i))
+		for (int i = 0; i < bitString.length(); i++) {
+			converted += getIntValue(bitString.charAt(bitString.length() - 1
+					- i))
 					* Math.pow(2, i);
 		}
 		return converted;
@@ -22,17 +23,13 @@ public class Utility {
 		StringBuilder bitString = new StringBuilder("000000000000000000000000");
 
 		for (int i = 23; i >= 0; i--) {
-			if (number == Math.pow(2, i)) {
-				bitString.setCharAt(23 - i, '1');
-				number = (int) (number - Math.pow(2, i));
-
-			} else if (number > Math.pow(2, i) && number < Math.pow(2, i + 1)) {
+			if ((number > Math.pow(2, i) && number < Math.pow(2, i + 1))
+					|| number == Math.pow(2, i)) {
 				bitString.setCharAt(23 - i, '1');
 				number = (int) (number - Math.pow(2, i));
 			}
 
 		}
-
 		return bitString.toString();
 
 	}
@@ -44,22 +41,22 @@ public class Utility {
 		}
 	}
 
-	private static void checkBitString(String string) {
+	private static void checkBitString(String bitString) {
 		/**
 		 * Check if string has more than 24 characters and if string contains
 		 * other than 0 and 1
 		 */
-		if (string.length() > 24) {
+		if (bitString.length() > 24) {
 			throw new IllegalArgumentException(
 					"String length must be less than 25");
 		}
 
-		if (hasLetter(string) && !stringIsEmpty(string)) {
+		if (hasLetter(bitString) && !stringIsEmpty(bitString)) {
 			throw new IllegalArgumentException(
 					"String can only contain numbers 0 - 1");
 		}
 
-		if (hasDigitBiggerThanOne(string) && !stringIsEmpty(string)) {
+		if (hasDigitBiggerThanOne(bitString) && !stringIsEmpty(bitString)) {
 			throw new IllegalArgumentException(
 					"String can only contain numbers 0 - 1");
 		}
@@ -140,7 +137,7 @@ public class Utility {
 				difference = position - power;
 				hex.append(createZeroes(difference));
 				position = position - difference;
-				
+
 			}
 
 			hex.append(getHexValue(number));
