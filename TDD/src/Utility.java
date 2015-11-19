@@ -128,17 +128,37 @@ public class Utility {
 
 	public static String convertIntToHex(int number) {
 		checkInt(number);
-		StringBuilder hex = new StringBuilder(6);
+		StringBuilder hex = new StringBuilder("000000");
 		int rest = 0;
+		
+		while (rest > 0) {
+		rest = (int) (number % Math.pow(16, getLargestPowerOfSixteenThatIsLessOrEqualToNumber(number)));
+		number = (int) (number / Math.pow(16, getLargestPowerOfSixteenThatIsLessOrEqualToNumber(number)));
+		hex.setCharAt(getLargestPowerOfSixteenThatIsLessOrEqualToNumber(number), getHexValue(number));
+		number = rest;
+		}
+		
 		if (number > 15) {
 			rest = number % 16;
-			hex.append(rest);
+			hex.append(getHexValue(rest));
 			number = number / 16;
 		}
 		
 		hex.insert(0, (getHexValue(number)));
 		return hex.toString();
 
+	}
+
+	private static int getLargestPowerOfSixteenThatIsLessOrEqualToNumber(
+			int number) {
+		int p = 0;
+		int power = (int) Math.pow(16, p);
+		while (power <= number) {
+			p++;
+			power = (int) Math.pow(16, p);
+		}
+		return p -1 ;
+		
 	}
 
 	private static char getHexValue(int number) {
@@ -148,5 +168,7 @@ public class Utility {
 		else 
 			return (char) ('A' + number - 10);
 	}
+	
+	
 
 }

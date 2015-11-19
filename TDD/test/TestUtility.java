@@ -178,6 +178,26 @@ public class TestUtility {
 		assertEquals("14", Utility.convertIntToHex(20));
 	}
 	
+	@Test
+	public void ConvertIntToHex_26_ShouldReturn1A() {
+		assertEquals("1A", Utility.convertIntToHex(26));
+	}
+	
+	@Test
+	public void ConvertIntToHex_35_ShouldReturn23() {
+		assertEquals("23", Utility.convertIntToHex(35));
+	}
+	
+	@Test
+	public void ConvertIntToHex_100_ShouldReturn64() {
+		assertEquals("64", Utility.convertIntToHex(100));
+	}
+	
+	@Test
+	public void ConvertIntToHex_16777215_ShouldReturnFFFFFF() {
+		assertEquals("FFFFFF", Utility.convertIntToHex(16777215));
+	}
+	
 	
 
 }
