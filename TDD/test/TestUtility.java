@@ -147,6 +147,21 @@ public class TestUtility {
 		assertEquals("1", Utility.convertIntToHex(1));
 	}
 	
+	@Test
+	public void ConvertIntToHex_10_ShouldReturnA() {
+		assertEquals("A", Utility.convertIntToHex(10));
+	}
+	
+	@Test
+	public void ConvertIntToHex_15_ShouldReturnF() {
+		assertEquals("F", Utility.convertIntToHex(15));
+	}
+	
+	@Test
+	public void ConvertIntToHex_12_ShouldReturnC() {
+		assertEquals("C", Utility.convertIntToHex(12));
+	}
+	
 	
 	
 

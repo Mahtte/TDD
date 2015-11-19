@@ -134,8 +134,11 @@ public class Utility {
 	}
 
 	private static char getHexValue(int number) {
-		
+		if (number >= 0 && number <= 9) {
 			return (char) ('0' + number);
+		}
+		else 
+			return (char) ('A' + number - 10);
 	}
 
 }
