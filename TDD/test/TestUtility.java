@@ -203,6 +203,16 @@ public class TestUtility {
 		assertEquals("F013", Utility.convertIntToHex(61459));
 	}
 	
+	@Test
+	public void ConvertIntToHex_20480_ShouldReturn5000 () {
+		assertEquals("5000", Utility.convertIntToHex(20480));
+	}
 	
+	@Test
+	public void ConvertIntToHex_4112_ShouldReturn1010 () {
+		assertEquals("1010", Utility.convertIntToHex(4112));
+	}
+
+
 
 }

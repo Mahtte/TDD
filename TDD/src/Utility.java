@@ -1,4 +1,3 @@
-
 public class Utility {
 
 	public static int convertBitToInt(String string) {
@@ -26,7 +25,7 @@ public class Utility {
 			if (number == Math.pow(2, i)) {
 				bitString.setCharAt(23 - i, '1');
 				number = (int) (number - Math.pow(2, i));
-				
+
 			} else if (number > Math.pow(2, i) && number < Math.pow(2, i + 1)) {
 				bitString.setCharAt(23 - i, '1');
 				number = (int) (number - Math.pow(2, i));
@@ -130,15 +129,35 @@ public class Utility {
 		checkInt(number);
 		StringBuilder hex = new StringBuilder(6);
 		int rest = -1;
-		
-		while(rest != 0) {
-	
-		rest = (int) (number % Math.pow(16, getLargestPowerOfSixteenThatIsLessOrEqualToNumber(number)));
-		number = (int) (number / Math.pow(16, getLargestPowerOfSixteenThatIsLessOrEqualToNumber(number)));
-		hex.append(getHexValue(number));
-		number = rest;
+		int position = getLargestPowerOfSixteenThatIsLessOrEqualToNumber(number);
+		int difference;
+
+		while (rest != 0) {
+			int power = getLargestPowerOfSixteenThatIsLessOrEqualToNumber(number);
+			rest = (int) (number % Math.pow(16, power));
+			number = (int) (number / Math.pow(16, power));
+			if (power < position) {
+				difference = position - power;
+
+				while (difference > 0) {
+					hex.append('0');
+					position--;
+					difference--;
+				}
+			}
+
+			hex.append(getHexValue(number));
+			position--;
+			if (rest == 0 && position >= 0) {
+				difference = power;
+				while (difference > 0) {
+					hex.append('0');
+					position--;
+					difference--;
+				}
+			}
+			number = rest;
 		}
-		
 
 		return hex.toString();
 
@@ -152,18 +171,15 @@ public class Utility {
 			p++;
 			power = (int) Math.pow(16, p);
 		}
-		return p -1 ;
-		
+		return p - 1;
+
 	}
 
 	private static char getHexValue(int number) {
 		if (number >= 0 && number <= 9) {
 			return (char) ('0' + number);
-		}
-		else 
+		} else
 			return (char) ('A' + number - 10);
 	}
-	
-	
 
 }
