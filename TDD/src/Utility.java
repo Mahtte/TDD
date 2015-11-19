@@ -148,7 +148,6 @@ public class Utility {
 			if (rest == 0 && position >= 0) {
 				difference = power;
 				hex.append(createZeroes(difference));
-				position = position - difference;
 			}
 			number = rest;
 		}
