@@ -128,8 +128,16 @@ public class Utility {
 
 	public static String convertIntToHex(int number) {
 		checkInt(number);
-		String hex = "" + getHexValue(number);
-		return hex;
+		StringBuilder hex = new StringBuilder(6);
+		int rest = 0;
+		if (number > 15) {
+			rest = number % 16;
+			hex.append(rest);
+			number = number / 16;
+		}
+		
+		hex.insert(0, (getHexValue(number)));
+		return hex.toString();
 
 	}
 

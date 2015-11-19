@@ -162,6 +162,21 @@ public class TestUtility {
 		assertEquals("C", Utility.convertIntToHex(12));
 	}
 	
+	@Test
+	public void ConvertIntToHex_16_ShouldReturn10() {
+		assertEquals("10", Utility.convertIntToHex(16));
+	}
+	
+	
+	@Test
+	public void ConvertIntToHex_17_ShouldReturn11() {
+		assertEquals("11", Utility.convertIntToHex(17));
+	}
+	
+	@Test
+	public void ConvertIntToHex_20_ShouldReturn14() {
+		assertEquals("14", Utility.convertIntToHex(20));
+	}
 	
 	
 
