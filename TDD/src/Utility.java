@@ -20,22 +20,17 @@ public class Utility {
 	public static String convertIntToBit(int number) {
 		checkInt(number);
 		StringBuilder bitString = new StringBuilder("000000000000000000000000");
-		int[] powers = new int[25];
-		for (int i = 0; i < powers.length; i++) {
-			powers[i] = (int) Math.pow(2, i);
-		}
 
-		for (int i = powers.length - 2; i >= 0; i--) {
+		for (int i = 23; i >= 0; i--) {
 
-			if (number == powers[i]) {
+			if (number == Math.pow(2, i)) {
 				bitString.setCharAt(23 - i, '1');
 
-				number = number - powers[i];
-			} else if (number > powers[i]) {
-				if (number < powers[i + 1]) {
-					bitString.setCharAt(23 - i, '1');
-					number = number - powers[i];
-				}
+				number = (int) (number - Math.pow(2, i));
+			} else if (number > Math.pow(2, i) && number < Math.pow(2, i + 1)) {
+
+				bitString.setCharAt(23 - i, '1');
+				number = (int) (number - Math.pow(2, i));
 
 			}
 
