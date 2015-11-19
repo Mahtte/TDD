@@ -1,4 +1,4 @@
-import java.util.HashMap;
+
 
 public class Utility {
 
@@ -116,17 +116,11 @@ public class Utility {
 	}
 
 	private static int getValue(char c) {
-
-		HashMap<Character, Integer> values = new java.util.HashMap<Character, Integer>(
-				16);
-		for (int i = 0; i < 7; i++) {
-			values.put((char) ('A' + i), 10 + i);
+		if (c >= '0' && c <= '9') {
+			return c - '0';
 		}
-
-		for (int i = 0; i < 10; i++) {
-			values.put((char) ('0' + i), i);
-		}
-		return values.get(c);
+		else
+			return (c - 'A') + 10;
 	}
 
 	private static void checkHexString(String string) {
