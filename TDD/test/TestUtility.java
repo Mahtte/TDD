@@ -226,7 +226,21 @@ public class TestUtility {
 		exception.expectMessage("At least one string is empty. Cant perform bitwise operation on empty bitstrings");
 		Utility.bitwiseOR("", "");
 	}
+	
+	@Test
+	public void BitwiseOR_0And0_ShouldReturn0 () {
+		assertEquals("0", Utility.bitwiseOR("0", "0"));
+	}
+	
+	@Test
+	public void BitwiseOR_0And1_ShouldReturn1 () {
+		assertEquals("1", Utility.bitwiseOR("0", "1"));
+	}
 
+	@Test
+	public void BitwiseOR_1And1_ShouldReturn1 () {
+		assertEquals("1", Utility.bitwiseOR("1", "1"));
+	}
 	
     
 	

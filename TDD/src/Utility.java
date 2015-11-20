@@ -184,8 +184,10 @@ public class Utility {
 
 	public static String bitwiseOR(String bitString1, String bitString2) {
 		checkBitStrings(bitString1, bitString2);
-
-		return "";
+		if (bitString1.charAt(0) == '0' && bitString2.charAt(0) == '0')
+			return "0";
+		else
+			return "1";
 
 	}
 
