@@ -212,6 +212,24 @@ public class TestUtility {
 	public void ConvertIntToHex_4112_ShouldReturn1010 () {
 		assertEquals("1010", Utility.convertIntToHex(4112));
 	}
+	
+	@Test
+	public void BitwiseOR_BitstringsLengthIsNotEqual_ShouldThrowException () {
+		exception.expect(IllegalArgumentException.class);
+		exception.expectMessage("Cant perform bitwise operation on bitstrings with unequal length");
+		Utility.bitwiseOR("001", "1111");
+	}
+	
+	@Test
+	public void BitwiseOR_BitstringsAreEmpty_ShouldThrowException () {
+		exception.expect(IllegalArgumentException.class);
+		exception.expectMessage("At least one string is empty. Cant perform bitwise operation on empty bitstrings");
+		Utility.bitwiseOR("", "");
+	}
+
+	
+    
+	
 
 
 

@@ -181,4 +181,26 @@ public class Utility {
 		}
 		return str;
 	}
+
+	public static String bitwiseOR(String bitString1, String bitString2) {
+		checkBitStrings(bitString1, bitString2);
+
+		return "";
+
+	}
+
+	private static void checkBitStrings(String bitString1, String bitString2) {
+		checkBitString(bitString1);
+		checkBitString(bitString2);
+		if (stringIsEmpty(bitString1) || stringIsEmpty(bitString2)) {
+			throw new IllegalArgumentException(
+					"At least one string is empty. Cant perform bitwise operation on empty bitstrings");
+		}
+		if (bitString1.length() != bitString2.length()) {
+			throw new IllegalArgumentException(
+					"Cant perform bitwise operation on bitstrings with unequal length");
+		}
+
+	}
+
 }
