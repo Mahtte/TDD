@@ -241,27 +241,88 @@ public class TestUtility {
 	public void BitwiseOR_1And1_ShouldReturn000000000000000000000001() {
 		assertEquals("000000000000000000000001", Utility.bitwiseOR("1", "1"));
 	}
-	
+
 	@Test
 	public void BitwiseOR_11And10_ShouldReturn000000000000000000000011() {
 		assertEquals("000000000000000000000011", Utility.bitwiseOR("11", "10"));
 	}
-	
+
 	@Test
 	public void BitwiseOR_OnlyOnesAndOnlyZeroes_ShouldReturn111111111111111111111111() {
-		assertEquals("111111111111111111111111", Utility.bitwiseOR("111111111111111111111111", "000000000000000000000000"));
+		assertEquals("111111111111111111111111", Utility.bitwiseOR(
+				"111111111111111111111111", "000000000000000000000000"));
 	}
-	
+
 	@Test
 	public void BitwiseOR_110001010101101101101001And100001101110001110000111_ShouldReturn110001111111101111101111() {
-		assertEquals("110001111111101111101111", Utility.bitwiseOR("110001010101101101101001", "100001101110001110000111"));
+		assertEquals("110001111111101111101111", Utility.bitwiseOR(
+				"110001010101101101101001", "100001101110001110000111"));
 	}
-	
+
 	@Test
 	public void BitwiseOR_010001010101101101101001And000001101110001110000111_ShouldReturn010001111111101111101111() {
-		assertEquals("010001111111101111101111", Utility.bitwiseOR("010001010101101101101001", "000001101110001110000111"));
+		assertEquals("010001111111101111101111", Utility.bitwiseOR(
+				"010001010101101101101001", "000001101110001110000111"));
 	}
-	
-	
+
+	@Test
+	public void BitwiseAND_BitstringsLengthIsNotEqual_ShouldThrowException() {
+		exception.expect(IllegalArgumentException.class);
+		exception
+				.expectMessage("Cant perform bitwise operation on bitstrings with unequal length");
+		Utility.bitwiseAND("001", "1111");
+	}
+
+	@Test
+	public void BitwiseAND_BitstringsAreEmpty_ShouldThrowException() {
+		exception.expect(IllegalArgumentException.class);
+		exception
+				.expectMessage("At least one string is empty. Cant perform bitwise operation on empty bitstrings");
+		Utility.bitwiseAND("", "");
+	}
+
+	@Test
+	public void BitwiseAND_0And0_ShouldReturn000000000000000000000000() {
+		assertEquals("000000000000000000000000", Utility.bitwiseAND("0", "0"));
+	}
+
+	@Test
+	public void BitwiseAND_0And1_ShouldReturn000000000000000000000000() {
+		assertEquals("000000000000000000000000", Utility.bitwiseAND("0", "1"));
+	}
+
+	@Test
+	public void BitwiseAND_1And1_ShouldReturn000000000000000000000001() {
+		assertEquals("000000000000000000000001", Utility.bitwiseAND("1", "1"));
+	}
+
+	@Test
+	public void BitwiseAND_11And10_ShouldReturn000000000000000000000011() {
+		assertEquals("000000000000000000000010", Utility.bitwiseAND("11", "10"));
+	}
+
+	@Test
+	public void BitwiseAND_OnlyOnesAndOnlyZeroes_ShouldReturn000000000000000000000000() {
+		assertEquals("000000000000000000000000", Utility.bitwiseAND(
+				"111111111111111111111111", "000000000000000000000000"));
+	}
+
+	@Test
+	public void BitwiseAND_OnlyOnesAndOnlyOnes_ShouldReturnOnlyOnes() {
+		assertEquals("111111111111111111111111", Utility.bitwiseAND(
+				"111111111111111111111111", "111111111111111111111111"));
+	}
+
+	@Test
+	public void BitwiseAND_110001010101101101101001And100001101110001110000111_ShouldReturn100001000100001100000001() {
+		assertEquals("100001000100001100000001", Utility.bitwiseAND(
+				"110001010101101101101001", "100001101110001110000111"));
+	}
+
+	@Test
+	public void BitwiseAND_010001010101101101101001And000001101110001110000111_ShouldReturn1000100001100000001() {
+		assertEquals("000001000100001100000001", Utility.bitwiseAND(
+				"010001010101101101101001", "000001101110001110000111"));
+	}
 
 }

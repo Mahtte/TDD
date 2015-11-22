@@ -185,14 +185,30 @@ public class Utility {
 	public static String bitwiseOR(String bitString1, String bitString2) {
 		checkBitStrings(bitString1, bitString2);
 		StringBuilder result = new StringBuilder(24);
-		result.append(createZeroes(24 - bitString1.length()));
-		
+
 		for (int i = 0; i < bitString1.length(); i++) {
 			if (bitString1.charAt(i) == '0' && bitString2.charAt(i) == '0')
 				result.append('0');
 			else
 				result.append('1');
 		}
+		result.insert(0, createZeroes(24 - result.length()));
+		return result.toString();
+
+	}
+
+	public static String bitwiseAND(String bitString1, String bitString2) {
+		checkBitStrings(bitString1, bitString2);
+		StringBuilder result = new StringBuilder(24);
+
+		for (int i = 0; i < bitString1.length(); i++) {
+			if (bitString1.charAt(i) == '1' && bitString2.charAt(i) == '1')
+				result.append('1');
+			else
+				result.append('0');
+		}
+
+		result.insert(0, createZeroes(24 - result.length()));
 
 		return result.toString();
 
