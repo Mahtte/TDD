@@ -6,8 +6,12 @@ public class DataReader {
 		this.fileOpener = fileOpener;
 	}
 
-	public boolean checkFile(String filePath) {
-		return fileOpener.exist(filePath);
+	public boolean checkFile() {
+		return fileOpener.exist();
+	}
+
+	public String readLine() {
+		return null;
 	}
 
 

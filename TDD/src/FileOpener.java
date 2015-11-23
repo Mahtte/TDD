@@ -1,7 +1,13 @@
 
 public interface FileOpener {
 
-	boolean exist(String filePath);
+	boolean exist();
+
+	String readLine();
+
+
+
+
 
 
 }
