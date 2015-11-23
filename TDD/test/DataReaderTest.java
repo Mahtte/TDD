@@ -47,14 +47,33 @@ public class DataReaderTest {
 	}
 	
 	@Test
-	public void readLine_StringWithWrongNumberOfArguments_ShouldThrowException() {
+	public void ReadLine_StringWithWrongNumberOfArguments_ShouldThrowException() {
 		when(mockFileOpener.readLine()).thenReturn("03ac0f 1 110101000000110111001101 001000011110011101001111 aa");
 		exception.expect(IllegalArgumentException.class);
 		exception.expectMessage("Line: 03ac0f 1 110101000000110111001101 001000011110011101001111 aa has wrong number of arguments");
 		reader.readLine();
+		verify(mockFileOpener, times(1)).readLine();	
+	}
+	
+	@Test
+	public void DoBitwiseOperation_1_ShouldReturnOperatedBitString() {
+		when(mockFileOpener.readLine()).thenReturn("03ac0f 1 110101000000110111001101 001000011110011101001111");
+		assertEquals("000000000000010101001101", reader.doBitwiseOperation(reader.readLine()));
 		verify(mockFileOpener, times(1)).readLine();
 		
 	}
+	
+	@Test
+	public void DoBitwiseOperation_2_ShouldReturnOperatedBitString() {
+		when(mockFileOpener.readLine()).thenReturn("03ac0f 2 110101000000110111001101 001000011110011101001111");
+		assertEquals("111101011110111111001111", reader.doBitwiseOperation(reader.readLine()));
+		verify(mockFileOpener, times(1)).readLine();
+		
+	}
+	
+	
+	
+	
 	
 	
 	
