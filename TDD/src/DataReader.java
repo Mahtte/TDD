@@ -10,7 +10,9 @@ public class DataReader {
 	}
 
 	public String readLine() {
-		return fileOpener.readLine();
+		String line = fileOpener.readLine();
+		checkLine(line);
+		return line;
 	}
 
 	public boolean hasMoreDataToRead() {
@@ -19,6 +21,16 @@ public class DataReader {
 
 	public int extractID(String string) {
 		return Utility.convertHexToInt(string.substring(0, 6));
+	}
+
+	private void checkLine(String line) {
+		String trimmed = line.trim();
+		int words = trimmed.isEmpty() ? 0 : trimmed.split("\\s+").length;
+		if (words != 4) {
+			throw new IllegalArgumentException(
+					"Line: " + line + " has wrong number of arguments");
+		}
+		
 	}
 
 }
