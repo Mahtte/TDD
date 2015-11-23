@@ -5,6 +5,8 @@ public interface FileOpener {
 
 	String readLine();
 
+	boolean hasNext();
+
 
 
 

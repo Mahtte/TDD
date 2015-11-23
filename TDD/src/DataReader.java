@@ -1,7 +1,6 @@
-
 public class DataReader {
 	private FileOpener fileOpener;
-	
+
 	public DataReader(FileOpener fileOpener) {
 		this.fileOpener = fileOpener;
 	}
@@ -11,8 +10,15 @@ public class DataReader {
 	}
 
 	public String readLine() {
-		return null;
+		return fileOpener.readLine();
 	}
 
+	public boolean hasMoreDataToRead() {
+		return fileOpener.hasNext();
+	}
+
+	public int extractID(String string) {
+		return Utility.convertHexToInt(string.substring(0, 6));
+	}
 
 }
