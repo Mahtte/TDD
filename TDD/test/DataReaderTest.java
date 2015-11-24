@@ -1,6 +1,9 @@
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -84,18 +87,27 @@ public class DataReaderTest {
 	}
 
 	@Test
-	public void GetListOfData_ShouldReturnAStringOfDataIDs() {
+	public void GetSetOfIDs_ShouldReturnASetOfDataIDs() {
 		reader.data.put(240655, "");
-		assertEquals("[240655]", reader.getSetOfData());
+
+		Set<Integer> IDs = new HashSet<Integer>();
+		IDs.add(240655);
+
+		assertEquals(IDs, reader.getSetOfIDs());
 	}
 
 	@Test
-	public void GetListOfData_MapHasManyKeys_ShouldReturnAStringOfDataIDs() {
+	public void GetSetOfIDs_MapHasManyKeys_ShouldReturnASetOfDataIDs() {
 		reader.data.put(240615, "");
 		reader.data.put(240635, "");
 		reader.data.put(240665, "");
 
-		assertEquals("[240615, 240635, 240665]", reader.getListOfData());
+		Set<Integer> IDs = new HashSet<Integer>();
+		IDs.add(240615);
+		IDs.add(240635);
+		IDs.add(240665);
+
+		assertEquals(IDs, reader.getSetOfIDs());
 	}
 
 	@Test
@@ -117,7 +129,7 @@ public class DataReaderTest {
 	}
 
 	@Test
-	public void GetListOfData_ShouldReturnListOfDataAfterReadAndProcessDataMethodHasBeenCalled() {
+	public void GetSetOfIDs_ShouldReturnASetOfIDsAfterReadAndProcessDataMethodHasBeenCalled() {
 		when(mockFileOpener.readLine()).thenReturn(
 				"03ac0f 2 110101000000110111001101 001000011110011101001111",
 				"03ac00 1 110101000000110111001100 001000011110011101001111",
@@ -127,7 +139,12 @@ public class DataReaderTest {
 
 		reader.ReadAndProcessData();
 
-		assertEquals("[240655, 240640, 44047]", reader.getListOfData());
+		Set<Integer> IDs = new HashSet<Integer>();
+		IDs.add(240655);
+		IDs.add(240640);
+		IDs.add(44047);
+
+		assertEquals(IDs, reader.getSetOfIDs());
 
 		verify(mockFileOpener, times(3)).readLine();
 		verify(mockFileOpener, times(4)).hasNext();

@@ -53,8 +53,8 @@ public class DataReader {
 
 	}
 
-	public String getSetOfIDs() {
-		return data.keySet().toString();
+	public Set getSetOfIDs() {
+		return data.keySet();
 		
 	}
 
