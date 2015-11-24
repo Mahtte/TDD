@@ -70,6 +70,45 @@ public class DataReaderTest {
 		verify(mockFileOpener, times(1)).readLine();
 		
 	}
+
+	@Test
+	public void GetListOfData_ShouldReturnAStringOfDataIDs() {
+		reader.data.put(240655, "");
+		assertEquals("[240655]", reader.getListOfData());
+	}
+	
+	@Test
+	public void GetListOfData_MapHasManyKeys_ShouldReturnAStringOfDataIDs() {
+		reader.data.put(240615, "");
+		reader.data.put(240635, "");
+		reader.data.put(240665, "");
+		
+		assertEquals("[240615, 240635, 240665]", reader.getListOfData());
+	}
+	
+	
+	@Test
+	public void GetData_240635_ShouldReturnDataForThatID() {
+		reader.data.put(240615, "h");
+		reader.data.put(240635, "a");
+		reader.data.put(240665, "b");
+		
+		assertEquals("a", reader.getData(240635));
+	}
+	
+	@Test
+	public void GetData_03ac0f_ShouldReturnDataForThatID() {
+		reader.data.put(240615, "h");
+		reader.data.put(240635, "a");
+		reader.data.put(240655, "b");
+		
+		assertEquals("b", reader.getData("03ac0f"));
+	}
+	
+	@Test
+	public void ProcessData
+	
+	
 	
 	
 	

@@ -1,5 +1,9 @@
+import java.util.HashMap;
+import java.util.Set;
+
 public class DataReader {
 	private FileOpener fileOpener;
+	public java.util.HashMap<Integer, String> data = new HashMap<Integer, String>();
 
 	public DataReader(FileOpener fileOpener) {
 		this.fileOpener = fileOpener;
@@ -47,6 +51,19 @@ public class DataReader {
 
 		return result;
 
+	}
+
+	public String getListOfData() {
+		return data.keySet().toString();
+		
+	}
+
+	public String getData(int id) {
+		return data.get(id);
+	}
+
+	public String getData(String hex) {
+		return data.get(Utility.convertHexToInt(hex));
 	}
 
 }
