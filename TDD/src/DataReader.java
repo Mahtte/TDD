@@ -53,7 +53,7 @@ public class DataReader {
 
 	}
 
-	public String getListOfData() {
+	public String getSetOfIDs() {
 		return data.keySet().toString();
 		
 	}
@@ -64,6 +64,14 @@ public class DataReader {
 
 	public String getData(String hex) {
 		return data.get(Utility.convertHexToInt(hex));
+	}
+
+	public void ReadAndProcessData() {
+		while(hasMoreDataToRead()) {
+			String line = readLine();
+			int id = extractID(line);
+			data.put(id, line);
+		}
 	}
 
 }
