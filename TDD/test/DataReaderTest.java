@@ -9,6 +9,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+
 public class DataReaderTest {
 	DataReader reader;
 	FileOpener mockFileOpener;
@@ -85,7 +86,7 @@ public class DataReaderTest {
 		verify(mockFileOpener, times(1)).readLine();
 
 	}
-
+	/**
 	@Test
 	public void GetSetOfIDs_ShouldReturnASetOfDataIDs() {
 		reader.data.put(240655, "");
@@ -127,6 +128,7 @@ public class DataReaderTest {
 
 		assertEquals("b", reader.getData("03ac0f"));
 	}
+	*/
 
 	@Test
 	public void GetSetOfIDs_ShouldReturnASetOfIDsAfterReadAndProcessDataMethodHasBeenCalled() {
@@ -148,6 +150,23 @@ public class DataReaderTest {
 
 		verify(mockFileOpener, times(3)).readLine();
 		verify(mockFileOpener, times(4)).hasNext();
+
+	}
+
+	@Test
+	public void GetData_03ac0f_ShouldReturnTheStoredDataForThatID() {
+		when(mockFileOpener.readLine()).thenReturn(
+				"03ac0f 2 110101000000110111001101 001000011110011101001111");
+		when(mockFileOpener.hasNext()).thenReturn(true, false);
+
+		reader.ReadAndProcessData();
+		DataReader.Data expected = new DataReader.Data(240655, 2, "111101011110111111001111", "110101000000110111001101", "001000011110011101001111");
+
+		assertEquals(expected.getResult(),
+				reader.getData("03ac0f").getResult());
+
+		verify(mockFileOpener, times(1)).readLine();
+		verify(mockFileOpener, times(2)).hasNext();
 
 	}
 
