@@ -25,7 +25,6 @@ public class DataReader {
 		return fileOpener.hasNext();
 	}
 
-
 	private void checkLine(String line) {
 		String trimmed = line.trim();
 		int words = trimmed.isEmpty() ? 0 : trimmed.split("\\s+").length;
@@ -36,7 +35,8 @@ public class DataReader {
 
 	}
 
-	public String doBitwiseOperation(String bitString1, String bitString2, int operation) {
+	public String doBitwiseOperation(String bitString1, String bitString2,
+			int operation) {
 		String result = "";
 		if (operation == 1) {
 			result = Utility.bitwiseAND(bitString1, bitString2);
@@ -68,25 +68,32 @@ public class DataReader {
 			String trimmed = line.trim();
 			arguments = trimmed.split("\\s+");
 			String id = arguments[0];
+			if (!arguments[1].matches("\\d")) {
+				errorLog.add(line);
+				continue;
+			}
+
 			int operation = Integer.parseInt(arguments[1]);
-			
+
 			if (hasError(id, operation)) {
 				errorLog.add(line);
 				continue;
 			}
-			
+
 			String bitString1 = arguments[2];
 			String bitString2 = arguments[3];
-			String result = doBitwiseOperation(bitString1, bitString2, operation);
+			String result = doBitwiseOperation(bitString1, bitString2,
+					operation);
 			Data dataFromFile = new Data(id, operation, result, bitString1,
 					bitString2);
-			
+
 			data.put(Utility.convertHexToInt(id), dataFromFile);
 		}
 	}
 
 	private boolean hasError(String id, int operation) {
-		return (operation != 1 && operation != 2) || data.containsKey(Utility.convertHexToInt(id));
+		return (operation != 1 && operation != 2)
+				|| data.containsKey(Utility.convertHexToInt(id));
 	}
 
 	public static class Data {

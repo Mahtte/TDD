@@ -296,18 +296,20 @@ public class DataReaderTest {
 	@Test
 	public void ReadAndProcessData_FileHasWrongBitOperation_ItShouldBeLogged() {
 		when(mockFileOpener.readLine()).thenReturn(
-				"03ac6f 3 110101000000110111001 001000011110011101001",
+				"03ac6f 2k 110101000000110111001 001000011110011101001",
 				"03a40f 1 110101000010110111001 001000011110011101001",
-				"03ac0f 2 110101000000110111001 001000011110011101001");
+				"03ac0f 2 1101010000001101110 0010000111100111010");
 		when(mockFileOpener.hasNext()).thenReturn(true, true, true, false);
 		
 		reader.ReadAndProcessData();
-		String errorLog = "[03ac6f 3 110101000000110111001 001000011110011101001]";
+		String errorLog = "[03ac6f 2k 110101000000110111001 001000011110011101001]";
 		
 		assertEquals(errorLog, reader.getErrorLogAsString());
 		verify(mockFileOpener, times(3)).readLine();
 		verify(mockFileOpener, times(4)).hasNext();
 			
 	}
+	
+	
 
 }
