@@ -23,8 +23,12 @@ public class DataReader {
 		return fileOpener.hasNext();
 	}
 
-	public int extractID(String string) {
+	public int extractIDasInt(String string) {
 		return Utility.convertHexToInt(string.substring(0, 6));
+	}
+
+	public String extractIDasHex(String string) {
+		return string.substring(0, 6);
 	}
 
 	private void checkLine(String line) {
@@ -69,14 +73,15 @@ public class DataReader {
 	public void ReadAndProcessData() {
 		while (hasMoreDataToRead()) {
 			String line = readLine();
-			int id = extractID(line);
+			String id = extractIDasHex(line);
 			String bitString1 = line.substring(9, 33);
 			String bitString2 = line.substring(34, 58);
-			int operation = line.charAt(7);
+			int operation = Character.getNumericValue(line.charAt(7));
 			String result = doBitwiseOperation(line);
-			Data dataFromFile = new Data(id, operation, result, bitString1, bitString2);
-			
-			data.put(id, dataFromFile);
+			Data dataFromFile = new Data(id, operation, result, bitString1,
+					bitString2);
+
+			data.put(Utility.convertHexToInt(id), dataFromFile);
 		}
 	}
 
@@ -91,8 +96,21 @@ public class DataReader {
 		private int bitString1Int;
 		private int bitString2Int;
 
-		public Data(int IDint, int operation, String result,
+		public Data(String IDhex, int operation, String result,
 				String bitString1, String bitString2) {
+			this.IDhex = IDhex;
+			this.IDint = Utility.convertHexToInt(IDhex);
+			this.operation = operation;
+			this.result = result;
+			this.resultInt = Utility.convertBitToInt(result);
+			this.bitString1 = bitString1;
+			this.bitString2 = bitString2;
+			this.bitString1Int = Utility.convertBitToInt(bitString1);
+			this.bitString2Int = Utility.convertBitToInt(bitString2);
+		}
+
+		public Data(int IDint, int operation, String result, String bitString1,
+				String bitString2) {
 			this.IDint = IDint;
 			this.IDhex = Utility.convertIntToHex(IDint);
 			this.operation = operation;
@@ -146,9 +164,10 @@ public class DataReader {
 			} else
 				return "OR";
 		}
-		
+
 		public String getOriginal() {
-			return (this.IDhex + " " + this.operation + " " + this.bitString1 + " " + this.bitString2);
+			return (this.IDhex + " " + this.operation + " " + this.bitString1
+					+ " " + this.bitString2);
 		}
 
 	}

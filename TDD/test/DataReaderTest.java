@@ -49,10 +49,10 @@ public class DataReaderTest {
 	}
 
 	@Test
-	public void ExtractID_StringOfDataWhereIDIs03ac0f_ShouldReturn240655() {
+	public void ExtractIDAsInt_StringOfDataWhereIDIs03ac0f_ShouldReturn240655() {
 		assertEquals(
 				240655,
-				reader.extractID("03ac0f 1 110101000000110111001101 001000011110011101001111"));
+				reader.extractIDasInt("03ac0f 1 110101000000110111001101 001000011110011101001111"));
 	}
 
 	@Test
@@ -86,10 +86,10 @@ public class DataReaderTest {
 		verify(mockFileOpener, times(1)).readLine();
 
 	}
-	/**
+
 	@Test
 	public void GetSetOfIDs_ShouldReturnASetOfDataIDs() {
-		reader.data.put(240655, "");
+		reader.data.put(240655, null);
 
 		Set<Integer> IDs = new HashSet<Integer>();
 		IDs.add(240655);
@@ -99,9 +99,9 @@ public class DataReaderTest {
 
 	@Test
 	public void GetSetOfIDs_MapHasManyKeys_ShouldReturnASetOfDataIDs() {
-		reader.data.put(240615, "");
-		reader.data.put(240635, "");
-		reader.data.put(240665, "");
+		reader.data.put(240615, null);
+		reader.data.put(240635, null);
+		reader.data.put(240665, null);
 
 		Set<Integer> IDs = new HashSet<Integer>();
 		IDs.add(240615);
@@ -112,23 +112,18 @@ public class DataReaderTest {
 	}
 
 	@Test
-	public void GetData_240635_ShouldReturnDataForThatID() {
-		reader.data.put(240615, "h");
-		reader.data.put(240635, "a");
-		reader.data.put(240665, "b");
-
-		assertEquals("a", reader.getData(240635));
+	public void GetData_240655_ShouldReturnDataForThatID() {
+		DataReader.Data expected = new DataReader.Data(240655, 2, "111101011110111111001111", "110101000000110111001101", "001000011110011101001111");
+		reader.data.put(240655, expected);
+		assertEquals(expected, reader.getData(240655));
 	}
 
 	@Test
 	public void GetData_03ac0f_ShouldReturnDataForThatID() {
-		reader.data.put(240615, "h");
-		reader.data.put(240635, "a");
-		reader.data.put(240655, "b");
-
-		assertEquals("b", reader.getData("03ac0f"));
+		DataReader.Data expected = new DataReader.Data(240655, 2, "111101011110111111001111", "110101000000110111001101", "001000011110011101001111");
+		reader.data.put(240655, expected);
+		assertEquals(expected, reader.getData("03ac0f"));
 	}
-	*/
 
 	@Test
 	public void GetSetOfIDs_ShouldReturnASetOfIDsAfterReadAndProcessDataMethodHasBeenCalled() {
@@ -154,7 +149,7 @@ public class DataReaderTest {
 	}
 
 	@Test
-	public void GetData_03ac0f_ShouldReturnTheStoredDataForThatID() {
+	public void GetDataGetResult_03ac0f_ShouldReturnResultOfThatID() {
 		when(mockFileOpener.readLine()).thenReturn(
 				"03ac0f 2 110101000000110111001101 001000011110011101001111");
 		when(mockFileOpener.hasNext()).thenReturn(true, false);
@@ -167,7 +162,102 @@ public class DataReaderTest {
 
 		verify(mockFileOpener, times(1)).readLine();
 		verify(mockFileOpener, times(2)).hasNext();
+	}
+	
+	@Test
+	public void GetDataGetResultInt_03ac0f_ShouldReturnResultOfThatID() {
+		when(mockFileOpener.readLine()).thenReturn(
+				"03ac0f 2 110101000000110111001101 001000011110011101001111");
+		when(mockFileOpener.hasNext()).thenReturn(true, false);
 
+		reader.ReadAndProcessData();
+		DataReader.Data expected = new DataReader.Data(240655, 2, "111101011110111111001111", "110101000000110111001101", "001000011110011101001111");
+
+		assertEquals(expected.getResultInt(),
+				reader.getData("03ac0f").getResultInt());
+
+		verify(mockFileOpener, times(1)).readLine();
+		verify(mockFileOpener, times(2)).hasNext();
+	}
+	
+	@Test
+	public void GetDataGetBitString1_03ac0f_ShouldReturnBitString1OfThatID() {
+		when(mockFileOpener.readLine()).thenReturn(
+				"03ac0f 2 110101000000110111001101 001000011110011101001111");
+		when(mockFileOpener.hasNext()).thenReturn(true, false);
+
+		reader.ReadAndProcessData();
+		DataReader.Data expected = new DataReader.Data(240655, 2, "111101011110111111001111", "110101000000110111001101", "001000011110011101001111");
+
+		assertEquals(expected.getBitString1(),
+				reader.getData("03ac0f").getBitString1());
+
+		verify(mockFileOpener, times(1)).readLine();
+		verify(mockFileOpener, times(2)).hasNext();
+	}
+	
+	@Test
+	public void GetDataGetBitString2_240655_ShouldReturnBitString2fThatID() {
+		when(mockFileOpener.readLine()).thenReturn(
+				"03ac0f 2 110101000000110111001101 001000011110011101001111");
+		when(mockFileOpener.hasNext()).thenReturn(true, false);
+
+		reader.ReadAndProcessData();
+		DataReader.Data expected = new DataReader.Data(240655, 2, "111101011110111111001111", "110101000000110111001101", "001000011110011101001111");
+
+		assertEquals(expected.getBitString2(),
+				reader.getData(240655).getBitString2());
+
+		verify(mockFileOpener, times(1)).readLine();
+		verify(mockFileOpener, times(2)).hasNext();
+	}
+	
+	
+	@Test
+	public void GetDataGetBitString1Int_240655_ShouldReturnBitString1fThatID() {
+		when(mockFileOpener.readLine()).thenReturn(
+				"03ac0f 2 110101000000110111001101 001000011110011101001111");
+		when(mockFileOpener.hasNext()).thenReturn(true, false);
+
+		reader.ReadAndProcessData();
+		DataReader.Data expected = new DataReader.Data(240655, 2, "111101011110111111001111", "110101000000110111001101", "001000011110011101001111");
+
+		assertEquals(expected.getBitString1Int(),
+				reader.getData(240655).getBitString1Int());
+
+		verify(mockFileOpener, times(1)).readLine();
+		verify(mockFileOpener, times(2)).hasNext();
+	}
+	
+	@Test
+	public void GetDataGetBitString2Int_240655_ShouldReturnBitString2fThatID() {
+		when(mockFileOpener.readLine()).thenReturn(
+				"03ac0f 2 110101000000110111001101 001000011110011101001111");
+		when(mockFileOpener.hasNext()).thenReturn(true, false);
+
+		reader.ReadAndProcessData();
+		DataReader.Data expected = new DataReader.Data(240655, 2, "111101011110111111001111", "110101000000110111001101", "001000011110011101001111");
+
+		assertEquals(expected.getBitString2Int(),
+				reader.getData(240655).getBitString2Int());
+
+		verify(mockFileOpener, times(1)).readLine();
+		verify(mockFileOpener, times(2)).hasNext();
+	}
+	
+	@Test
+	public void GetDataGetOrginal_240655_ShouldReturnOriginalDataString() {
+		when(mockFileOpener.readLine()).thenReturn(
+				"03ac0f 2 110101000000110111001101 001000011110011101001111");
+		when(mockFileOpener.hasNext()).thenReturn(true, false);
+
+		reader.ReadAndProcessData();
+
+		assertEquals("03ac0f 2 110101000000110111001101 001000011110011101001111",
+				reader.getData(240655).getOriginal());
+
+		verify(mockFileOpener, times(1)).readLine();
+		verify(mockFileOpener, times(2)).hasNext();
 	}
 
 }
