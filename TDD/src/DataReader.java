@@ -1,9 +1,11 @@
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
 
 public class DataReader {
 	private FileOpener fileOpener;
 	public java.util.HashMap<Integer, Data> data = new HashMap<Integer, Data>();
+	private ArrayList<String> errorLog = new ArrayList<String>();
 
 	public DataReader(FileOpener fileOpener) {
 		this.fileOpener = fileOpener;
@@ -66,13 +68,21 @@ public class DataReader {
 			String trimmed = line.trim();
 			arguments = trimmed.split("\\s+");
 			String id = arguments[0];
+			if (data.containsKey(Utility.convertHexToInt(id))) {
+				errorLog.add(line);
+				continue;
+			}
 			String bitString1 = arguments[2];
 			String bitString2 = arguments[3];
 			int operation = Integer.parseInt(arguments[1]);
+			if (operation != 1 && operation != 2) {
+				errorLog.add(line);
+				continue;
+			}
 			String result = doBitwiseOperation(bitString1, bitString2, operation);
 			Data dataFromFile = new Data(id, operation, result, bitString1,
 					bitString2);
-
+			
 			data.put(Utility.convertHexToInt(id), dataFromFile);
 		}
 	}
@@ -162,6 +172,11 @@ public class DataReader {
 					+ " " + this.bitString2);
 		}
 
+	}
+
+	public String getErrorLogAsString() {
+
+		return errorLog.toString();
 	}
 
 }

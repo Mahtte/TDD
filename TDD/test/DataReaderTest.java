@@ -275,4 +275,39 @@ public class DataReaderTest {
 		verify(mockFileOpener, times(2)).hasNext();
 	}
 
+	@Test
+	public void ReadAndProcessData_FileHasDuplicateIDs_DuplicatesShouldBeLogged() {
+		when(mockFileOpener.readLine()).thenReturn(
+				"03ac0f 1 110101000000110111001 001000011110011101001",
+				"03a40f 1 110101000010110111001 001000011110011101001",
+				"03ac0f 2 110101000000110111001 001000011110011101001");
+		when(mockFileOpener.hasNext()).thenReturn(true, true, true, false);
+		
+		reader.ReadAndProcessData();
+		String duplicates = "[03ac0f 2 110101000000110111001 001000011110011101001]";
+		
+		assertEquals(duplicates, reader.getErrorLogAsString());
+		verify(mockFileOpener, times(3)).readLine();
+		verify(mockFileOpener, times(4)).hasNext();
+			
+	}
+	
+
+	@Test
+	public void ReadAndProcessData_FileHasWrongBitOperation_ItShouldBeLogged() {
+		when(mockFileOpener.readLine()).thenReturn(
+				"03ac6f 3 110101000000110111001 001000011110011101001",
+				"03a40f 1 110101000010110111001 001000011110011101001",
+				"03ac0f 2 110101000000110111001 001000011110011101001");
+		when(mockFileOpener.hasNext()).thenReturn(true, true, true, false);
+		
+		reader.ReadAndProcessData();
+		String errorLog = "[03ac6f 3 110101000000110111001 001000011110011101001]";
+		
+		assertEquals(errorLog, reader.getErrorLogAsString());
+		verify(mockFileOpener, times(3)).readLine();
+		verify(mockFileOpener, times(4)).hasNext();
+			
+	}
+
 }
