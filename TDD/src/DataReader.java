@@ -23,13 +23,6 @@ public class DataReader {
 		return fileOpener.hasNext();
 	}
 
-	public int extractIDasInt(String string) {
-		return Utility.convertHexToInt(string.substring(0, 6));
-	}
-
-	public String extractIDasHex(String string) {
-		return string.substring(0, 6);
-	}
 
 	private void checkLine(String line) {
 		String trimmed = line.trim();
@@ -41,15 +34,11 @@ public class DataReader {
 
 	}
 
-	public String doBitwiseOperation(String string) {
-		char operation = string.charAt(7);
-		String bitString1 = string.substring(9, 33);
-		String bitString2 = string.substring(34, 58);
+	public String doBitwiseOperation(String bitString1, String bitString2, int operation) {
 		String result = "";
-
-		if (operation == '1') {
+		if (operation == 1) {
 			result = Utility.bitwiseAND(bitString1, bitString2);
-		} else if (operation == '2') {
+		} else if (operation == 2) {
 			result = Utility.bitwiseOR(bitString1, bitString2);
 		}
 
@@ -57,7 +46,7 @@ public class DataReader {
 
 	}
 
-	public Set getSetOfIDs() {
+	public Set<Integer> getSetOfIDs() {
 		return data.keySet();
 
 	}
@@ -72,12 +61,15 @@ public class DataReader {
 
 	public void ReadAndProcessData() {
 		while (hasMoreDataToRead()) {
+			String[] arguments = new String[4];
 			String line = readLine();
-			String id = extractIDasHex(line);
-			String bitString1 = line.substring(9, 33);
-			String bitString2 = line.substring(34, 58);
-			int operation = Character.getNumericValue(line.charAt(7));
-			String result = doBitwiseOperation(line);
+			String trimmed = line.trim();
+			arguments = trimmed.split("\\s+");
+			String id = arguments[0];
+			String bitString1 = arguments[2];
+			String bitString2 = arguments[3];
+			int operation = Integer.parseInt(arguments[1]);
+			String result = doBitwiseOperation(bitString1, bitString2, operation);
 			Data dataFromFile = new Data(id, operation, result, bitString1,
 					bitString2);
 
